@@ -86,18 +86,21 @@ fn add_flora(
 fn setup_algae(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
-    mut texture_atlases: ResMut<Assets<TextureAtlas>>
 ) {
     commands.spawn_bundle(OrthographicCameraBundle::new_2d());
 
-    commands
+    for _ in 0..10 {
+        commands
         .spawn_bundle(SpriteBundle {
             texture: asset_server.load("textures/tree-ornament.png"),
-            transform: Transform::from_scale(Vec3::splat(1.0)),
+            transform: Transform::from_scale(Vec3::splat(0.04))
+            .with_translation(Vec3::new(100.0, 0.0, 0.0)),,
             ..default()
         })
         .insert(Health(20))
         .insert(Creature::Algae);
+    }
+    
 }
 
 fn animate_sprite(
